@@ -124,18 +124,36 @@ function shareOnX(type) {
 
 function renderIntro() {
   app.innerHTML = `
-    <section class="intro-view lp-view">
-      <div class="lp-hero">
-        <div class="lp-copy">
+    <section class="sales-page">
+      <section class="sales-hero">
+        <div class="sales-copy">
           <p class="eyebrow">${diagnosisData.meta.eyebrow || "Diagnosis Quiz"}</p>
           <h1>${diagnosisData.meta.title}</h1>
           <p class="subtitle">${diagnosisData.meta.subtitle}</p>
           <button class="primary-action" type="button" data-action="start">${diagnosisData.meta.startButton || "診断をはじめる"}</button>
         </div>
-        <div class="lp-panel" aria-hidden="true">
-          ${diagnosisData.types.map((type) => renderTypeImage(type, "lp-type-card")).join("")}
+        <div class="sales-preview" aria-hidden="true">
+          <div class="preview-card main-preview">
+            <span>RESULT</span>
+            <strong>${diagnosisData.types[0]?.name || "タイプ"}タイプ</strong>
+            <p>${diagnosisData.results[diagnosisData.types[0]?.id]?.title || "あなたに合う方向性がわかります"}</p>
+          </div>
+          <div class="preview-stack">
+            ${diagnosisData.types
+              .slice(0, 3)
+              .map((type) => `<div><b>${type.shortName || type.name}</b><span>${type.name}</span></div>`)
+              .join("")}
+          </div>
         </div>
-      </div>
+      </section>
+      <section class="problem-section">
+        <h2>こんな導線に使えます</h2>
+        <div class="problem-grid">
+          <p>SNSからLINE登録につなげたい</p>
+          <p>予約や申込の前に興味を高めたい</p>
+          <p>商品に合うタイプ別提案をしたい</p>
+        </div>
+      </section>
       <section class="benefit-band">
         <div>
           <strong>01</strong>
@@ -149,6 +167,11 @@ function renderIntro() {
           <strong>03</strong>
           <span>結果から申込へ進める</span>
         </div>
+      </section>
+      <section class="embedded-start">
+        <h2>まずは診断を試す</h2>
+        <p>数問に答えるだけで、あなたに合うタイプと次の行動がわかります。</p>
+        <button class="primary-action" type="button" data-action="start">診断へ進む</button>
       </section>
       <p class="disclaimer">${diagnosisData.meta.disclaimer}</p>
     </section>
