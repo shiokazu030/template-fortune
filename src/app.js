@@ -124,16 +124,32 @@ function shareOnX(type) {
 
 function renderIntro() {
   app.innerHTML = `
-    <section class="intro-view">
-      <div class="hero-panel">
-        <p class="eyebrow">${diagnosisData.meta.eyebrow || "Diagnosis Quiz"}</p>
-        <h1>${diagnosisData.meta.title}</h1>
-        <p class="subtitle">${diagnosisData.meta.subtitle}</p>
-        <div class="type-strip" aria-hidden="true">
-          ${diagnosisData.types.map((type) => renderTypeImage(type, "mini-photo")).join("")}
+    <section class="intro-view lp-view">
+      <div class="lp-hero">
+        <div class="lp-copy">
+          <p class="eyebrow">${diagnosisData.meta.eyebrow || "Diagnosis Quiz"}</p>
+          <h1>${diagnosisData.meta.title}</h1>
+          <p class="subtitle">${diagnosisData.meta.subtitle}</p>
+          <button class="primary-action" type="button" data-action="start">${diagnosisData.meta.startButton || "診断をはじめる"}</button>
         </div>
-        <button class="primary-action" type="button" data-action="start">${diagnosisData.meta.startButton || "診断をはじめる"}</button>
+        <div class="lp-panel" aria-hidden="true">
+          ${diagnosisData.types.map((type) => renderTypeImage(type, "lp-type-card")).join("")}
+        </div>
       </div>
+      <section class="benefit-band">
+        <div>
+          <strong>01</strong>
+          <span>あなたのタイプがわかる</span>
+        </div>
+        <div>
+          <strong>02</strong>
+          <span>次にやることが見える</span>
+        </div>
+        <div>
+          <strong>03</strong>
+          <span>結果から申込へ進める</span>
+        </div>
+      </section>
       <p class="disclaimer">${diagnosisData.meta.disclaimer}</p>
     </section>
   `;
